@@ -9,3 +9,9 @@ libopenmpi-dev openmpi-bin \
 libboost-dev \
 g++
 
+RUN groupadd -r portage
+RUN useradd -r -m -g portage portage
+USER portage
+WORKDIR /home/portage
+
+
