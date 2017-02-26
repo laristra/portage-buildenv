@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 cmake \
 libopenmpi-dev openmpi-bin \
 libboost-dev \
-python-pip \
+python-pip git \
 g++
 
 RUN groupadd -r portage
