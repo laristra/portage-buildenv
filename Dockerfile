@@ -7,11 +7,12 @@ RUN apt-get update && apt-get install -y \
 cmake \
 libopenmpi-dev openmpi-bin \
 libboost-dev \
+python-pip \
 g++
 
 RUN groupadd -r portage
 RUN useradd -r -m -g portage portage
 USER portage
 WORKDIR /home/portage
-
+RUN pip install --user codecov
 
