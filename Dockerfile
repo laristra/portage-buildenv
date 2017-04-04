@@ -8,11 +8,19 @@ cmake \
 libopenmpi-dev openmpi-bin \
 libboost-dev \
 python-pip git \
+wget curl lcov doxygen \
 g++
+
+RUN apt-get install -y openjdk-8-jdk unzip
+RUN wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.8.zip https://sonarqube.com/static/cpp/build-wrapper-linux-x86.zip
+RUN unzip sonar-scanner-2.8.zip -d /sonarqube/
+RUN unzip build-wrapper-linux-x86.zip -d /sonarqube/
+ENV PATH=${PATH}${PATH:+:}/sonarqube/build-wrapper-linux-x86:/sonarqube/sonar-scanner-2.8/bin
+RUN sonar-scanner -h
 
 RUN groupadd -r portage
 RUN useradd -r -m -g portage portage
 USER portage
 WORKDIR /home/portage
-RUN pip install --user codecov
+RUN pip install --user codecov coverxygen
 
