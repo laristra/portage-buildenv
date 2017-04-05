@@ -22,6 +22,7 @@ RUN sonar-scanner -h
 RUN groupadd -r portage
 RUN useradd -r -m -g portage portage
 USER portage
+ENV PATH=/usr/lib/ccache:${PATH}
 WORKDIR /home/portage
 RUN pip install --user codecov coverxygen
 
