@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
 cmake \
 libopenmpi-dev openmpi-bin \
 libboost-dev \
+liblapack-dev liplapacke-dev \
 python-pip git \
 wget curl lcov doxygen \
 ccache texlive-latex-base texlive-fonts-recommended texlive-latex-recommended texlive-font-utils \
