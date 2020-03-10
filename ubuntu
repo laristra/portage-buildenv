@@ -18,7 +18,7 @@ libexodusii-dev \
 libexodusii5 \
 libnemesis3 \
 libunittest++-dev \
-libtrilinos-zoltan-dev \
+libtrilinos-zoltan-dev 
 
 RUN groupadd -r portage
 RUN useradd -r -m -g portage -G sudo portage
