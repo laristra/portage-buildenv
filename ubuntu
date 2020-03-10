@@ -30,7 +30,7 @@ WORKDIR /home/portage
 RUN pip install --user codecov coverxygen
 
 # Build MSTK and Jali
-RUN wget https://github.com/MeshToolkit/mstk/archive/3.3.2.tar.gz &&
+RUN wget https://github.com/MeshToolkit/mstk/archive/3.3.2.tar.gz && \
      tar xvzf 3.3.2.tar.gz
 WORKDIR MSTK-3.3.2
 RUN mkdir build
