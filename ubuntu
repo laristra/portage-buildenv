@@ -59,7 +59,7 @@ RUN cmake -D CMAKE_PREFIX_PATH=$MSTK_DIR \
      -D CMAKE_INSTALL_PREFIX=$JALI_DIR \
      -D CMAKE_BUILD_TYPE=Release \
      -D ENABLE_MSTK=yes \
-     -D ENABLE_Tests=yes .. \
+     -D ENABLE_Tests=yes .. 
 RUN make && make test
 RUN make install
 RUN echo $JALI_DIR
