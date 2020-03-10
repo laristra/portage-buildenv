@@ -1,5 +1,6 @@
 #FROM ubuntu:latest
-FROM ubuntu:eoan
+#FROM ubuntu:eoan
+FROM ubuntu:bionic
 
 RUN apt-get -q update -y && apt-get -qq install -y \
 sudo \
@@ -19,8 +20,7 @@ libexodusii-dev \
 libexodusii5 \
 libnemesis3 \
 libunittest++-dev \
-libtrilinos-zoltan-dev \ 
-libtrilinos-zoltan2-dev 
+libtrilinos-zoltan-dev  
 
 RUN groupadd -r portage
 RUN useradd -r -m -g portage -G sudo portage
