@@ -1,8 +1,9 @@
-FROM ubuntu:latest
+#FROM ubuntu:latest
+FROM ubuntu:eoan
 
 RUN apt-get -q update -y && apt-get -qq install -y \
 sudo \
-cmake cmake-data \
+cmake-3.12.0 cmake-data \
 libopenmpi-dev openmpi-bin \
 libboost-all-dev \
 liblapack-dev liblapacke-dev \
