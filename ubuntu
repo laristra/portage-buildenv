@@ -4,7 +4,6 @@ FROM ubuntu:bionic
 
 RUN apt-get -q update -y && apt-get -qq install -y \
 sudo \
-cmake cmake-data \
 libopenmpi-dev openmpi-bin \
 libboost-all-dev \
 liblapack-dev liblapacke-dev \
@@ -30,6 +29,14 @@ USER portage
 ENV PATH=/usr/lib/ccache:${PATH}
 WORKDIR /home/portage
 RUN pip install --user codecov coverxygen
+
+# Build cmake 3.13.4
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz && \ 
+tar zxvf cmake-3.13.4.tar.gz
+WORKDIR cmake-3.13.4 
+RUN sudo ./bootstrap 
+RUN sudo make && sudo make install
+WORKDIR ..
 
 # Build MSTK and Jali
 RUN wget https://github.com/MeshToolkit/mstk/archive/3.3.2.tar.gz && \
