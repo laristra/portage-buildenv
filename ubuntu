@@ -55,20 +55,20 @@ RUN  cmake -D CMAKE_BUILD_TYPE=Release \
      -D ENABLE_Tests=yes ..
 RUN make -j2 && make test
 RUN make install
-RUN echo $MSTK_DIR
+RUN ls $MSTK_DIR
 
-#WORKDIR ../..
-#RUN git clone https://github.com/lanl/jali.git
-#WORKDIR jali
-##RUN git checkout 1.0.5
-#RUN mkdir build
-#WORKDIR build
-#ENV JALI_DIR /home/portage/jali/install
-#RUN cmake -D CMAKE_PREFIX_PATH=$MSTK_DIR \
-#     -D CMAKE_INSTALL_PREFIX=$JALI_DIR \
-#     -D CMAKE_BUILD_TYPE=Release \
-#     -D ENABLE_MSTK_Mesh:BOOL=TRUE \
-#     -D ENABLE_Tests=yes .. 
-#RUN make && make test
-#RUN make install
-#RUN echo $JALI_DIR
+WORKDIR ../..
+RUN git clone https://github.com/lanl/jali.git
+WORKDIR jali
+#RUN git checkout 1.0.5
+RUN mkdir build
+WORKDIR build
+ENV JALI_DIR /home/portage/jali/install
+RUN cmake -D CMAKE_PREFIX_PATH=$MSTK_DIR \
+     -D CMAKE_INSTALL_PREFIX=$JALI_DIR \
+     -D CMAKE_BUILD_TYPE=Release \
+     -D ENABLE_MSTK_Mesh:BOOL=TRUE \
+     -D ENABLE_Tests=yes .. 
+RUN make && make test
+RUN make install
+RUN ls $JALI_DIR
