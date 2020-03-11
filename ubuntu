@@ -50,7 +50,6 @@ RUN  cmake -D CMAKE_BUILD_TYPE=Release \
      -D ENABLE_PARALLEL=ON \
      -D ENABLE_METIS=yes \
      -D ENABLE_ExodusII=yes \
-     -D ENABLE_ZOLTAN=yes \
      -D ENABLE_Tests=yes ..
 RUN make -j2 && make test
 RUN make install
