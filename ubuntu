@@ -59,7 +59,7 @@ RUN echo $MSTK_DIR
 WORKDIR ../..
 RUN git clone https://github.com/lanl/jali.git
 WORKDIR jali
-RUN git checkout 1.0.5
+#RUN git checkout 1.0.5
 RUN mkdir build
 WORKDIR build
 ENV JALI_DIR /home/portage/jali/install
