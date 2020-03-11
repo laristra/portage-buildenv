@@ -32,27 +32,27 @@ RUN pip install --user codecov coverxygen
 
 # Build cmake 3.13.4
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz && \ 
-tar zxvf cmake-3.13.4.tar.gz
+tar zxf cmake-3.13.4.tar.gz
 WORKDIR cmake-3.13.4 
 RUN sudo ./bootstrap 
-RUN sudo make && sudo make install
+RUN sudo make -j2 && sudo make install
 WORKDIR ..
 
 # Build MSTK and Jali
 RUN wget https://github.com/MeshToolkit/mstk/archive/3.3.2.tar.gz && \
-     tar xvzf 3.3.2.tar.gz
+     tar xzf 3.3.2.tar.gz
 WORKDIR MSTK-3.3.2
 RUN mkdir build
 WORKDIR build
 ENV MSTK_DIR /home/portage/MSTK-3.3.2/install
 RUN  cmake -D CMAKE_BUILD_TYPE=Release \
      -D CMAKE_INSTALL_PREFIX=$MSTK_DIR \
-     -D ENABLE_PARALLE=$PARALLEL \
+     -D ENABLE_PARALLEL=ON \
      -D ENABLE_METIS=yes \
      -D ENABLE_ExodusII=yes \
      -D ENABLE_Zoltan=yes \
      -D ENABLE_Tests=yes ..
-RUN make && make test
+RUN make -j2 && make test
 RUN make install
 RUN echo $MSTK_DIR
 
