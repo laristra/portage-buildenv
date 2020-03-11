@@ -46,7 +46,7 @@ RUN mkdir build
 WORKDIR build
 ENV MSTK_DIR /home/portage/MSTK-3.3.2/install 
 RUN  cmake -D CMAKE_BUILD_TYPE=Release \
-     -D CMAKE_PREFIX_PATH="/usr/include/trilinos;/usr/lib/x86_63-linux-gnu;/usr/lib/x86_64-linux-gnu/cmake/Zoltan" \
+     -D CMAKE_PREFIX_PATH="/usr/include/trilinos;/usr/lib/x86_64-linux-gnu;/usr/lib/x86_64-linux-gnu/cmake/Zoltan" \
      -D CMAKE_INSTALL_PREFIX=$MSTK_DIR \
      -D ENABLE_PARALLEL=ON \
      -D ENABLE_METIS=yes \
