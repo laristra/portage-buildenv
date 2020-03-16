@@ -19,7 +19,8 @@ libexodusii-dev \
 libexodusii5 \
 libnemesis3 \
 libunittest++-dev \
-libtrilinos-zoltan-dev  
+libtrilinos-zoltan-dev \
+libboost-all-dev 
 
 RUN groupadd -r portage
 RUN useradd -r -m -g portage -G sudo portage
@@ -39,21 +40,21 @@ RUN sudo make -j2 && sudo make install
 WORKDIR ..
 
 # Build MSTK and Jali
-RUN wget https://github.com/MeshToolkit/mstk/archive/3.3.2.tar.gz && \
-     tar xzf 3.3.2.tar.gz
-WORKDIR MSTK-3.3.2
+RUN wget https://github.com/MeshToolkit/mstk/archive/3.3.4.tar.gz && \
+     tar xzf 3.3.4.tar.gz
+WORKDIR MSTK-3.3.4
 RUN mkdir build
 WORKDIR build
-ENV MSTK_DIR /home/portage/MSTK-3.3.2/install 
+ENV MSTK_DIR /home/portage/MSTK-3.3.4/install 
 RUN  cmake -D CMAKE_BUILD_TYPE=Release \
-     -D CMAKE_PREFIX_PATH="/usr/include/trilinos;/usr/lib/x86_64-linux-gnu;/usr/lib/x86_64-linux-gnu/cmake/Zoltan" \
+     -D CMAKE_PREFIX_PATH="/usr/include/trilinos" \
      -D CMAKE_INSTALL_PREFIX=$MSTK_DIR \
      -D ENABLE_PARALLEL=ON \
      -D ENABLE_METIS=yes \
-     -D ENABLE_Zoltan=yes \
+     -D ENABLE_ZOLTAN=yes \
      -D ENABLE_ExodusII=yes \
      -D ENABLE_Tests=yes ..
-RUN make -j2 && make test
+RUN make VERBOSE=1 -j2 && make test
 RUN make install
 RUN ls $MSTK_DIR
 
@@ -64,11 +65,11 @@ WORKDIR jali
 RUN mkdir build
 WORKDIR build
 ENV JALI_DIR /home/portage/jali/install
-RUN cmake -D CMAKE_PREFIX_PATH=$MSTK_DIR \
+RUN cmake -D CMAKE_PREFIX_PATH="$MSTK_DIR;/usr/include/trilinos" \
      -D CMAKE_INSTALL_PREFIX=$JALI_DIR \
      -D CMAKE_BUILD_TYPE=Release \
      -D ENABLE_MSTK_Mesh:BOOL=TRUE \
      -D ENABLE_Tests=yes .. 
-RUN make && make test
+RUN make VERBOSE=1 -j2 && make test
 RUN make install
 RUN ls $JALI_DIR
